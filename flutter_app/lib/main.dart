@@ -1,61 +1,41 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
-//
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) => MaterialApp(
-//         title: 'Flutter App',
-//         theme: ThemeData(
-//           primarySwatch: Colors.blue,
-//         ),
-//         home: Scaffold(
-//           body: Center(
-//             child: Text(
-//               'Flutter Demo Home Page',
-//               style: Theme.of(context).textTheme.display1,
-//             ),
-//           ),
-//         ),
-//       );
-// }
+void main() => runApp(MaterialApp(
+      title: 'Navigation',
+      home: FirstScreen(),
+    ));
 
-class MyApp extends StatefulWidget {
+class FirstScreen extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int _counter = 0;
-
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('You have pushed the button this many times:'),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.display1,
-                ),
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: Icon(Icons.add),
-          ),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('1番目のルート'),
+        ),
+        body: Center(
+          child: RaisedButton(
+              child: Text('次の画面を開く'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SecondScrreen()),
+                );
+              }),
         ),
       );
+}
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class SecondScrreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('2番目のルート'),
+        ),
+        body: Center(
+          child: RaisedButton(
+              child: Text('戻る'),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+        ),
+      );
 }
