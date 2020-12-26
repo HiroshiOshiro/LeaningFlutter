@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
       title: 'Navigation',
-      home: FirstScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => FirstScreen(),
+        '/second': (context) => SecondScrreen(),
+      },
     ));
 
 class FirstScreen extends StatelessWidget {
@@ -15,10 +19,7 @@ class FirstScreen extends StatelessWidget {
           child: RaisedButton(
               child: Text('次の画面を開く'),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SecondScrreen()),
-                );
+                Navigator.pushNamed(context, '/second');
               }),
         ),
       );
