@@ -2,48 +2,41 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
       title: 'Navigation',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstScreen(),
-        '/second': (context) => SecondScrreen(),
-      },
+      home: FirstScreen(),
     ));
 
 class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Snack Bar'),
+          title: Text('First Screen'),
         ),
-        body: Builder(
-          builder: (context) => Center(
-            child: RaisedButton(
-                child: Text('Show Snack Bar'),
-                // onPressed: () {
-                //   Navigator.pushNamed(context, '/second');
-                // }),
-                onPressed: () {
-                  Scaffold.of(context)
-                    ..removeCurrentSnackBar()
-                    ..showSnackBar(SnackBar(content: Text('snack')));
-                }),
+        body: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => DetailScreen()));
+          },
+          child: Hero (
+            tag: 'imageHero',
+            child: Image.network('https://picsum.photos/250?image=9'),
           ),
         ),
       );
 }
 
-class SecondScrreen extends StatelessWidget {
+class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('2番目のルート'),
-        ),
-        body: Center(
-          child: RaisedButton(
-              child: Text('戻る'),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+        body: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Center (
+            child: Hero (
+              tag: 'imageHero',
+              child: Image.network('https://picsum.photos/250?image=9'),
+            ),
+          ),
         ),
       );
 }
