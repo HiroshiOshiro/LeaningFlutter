@@ -13,14 +13,21 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('1番目のルート'),
+          title: Text('Snack Bar'),
         ),
-        body: Center(
-          child: RaisedButton(
-              child: Text('次の画面を開く'),
-              onPressed: () {
-                Navigator.pushNamed(context, '/second');
-              }),
+        body: Builder(
+          builder: (context) => Center(
+            child: RaisedButton(
+                child: Text('Show Snack Bar'),
+                // onPressed: () {
+                //   Navigator.pushNamed(context, '/second');
+                // }),
+                onPressed: () {
+                  Scaffold.of(context)
+                    ..removeCurrentSnackBar()
+                    ..showSnackBar(SnackBar(content: Text('snack')));
+                }),
+          ),
         ),
       );
 }
