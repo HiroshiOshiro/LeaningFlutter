@@ -1,41 +1,50 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(
-      title: 'Navigation',
-      home: FirstScreen(),
-    ));
+void main() => runApp(MyApp());
 
-class FirstScreen extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('First Screen'),
-        ),
-        body: GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => DetailScreen()));
-          },
-          child: Hero (
-            tag: 'imageHero',
-            child: Image.network('https://picsum.photos/250?image=9'),
-          ),
-        ),
+  Widget build(BuildContext context) => MaterialApp(
+        home: LogoApp(),
       );
 }
 
-class DetailScreen extends StatelessWidget {
+class LogoApp extends StatefulWidget {
+  @override
+  _LogoAppState createState() => _LogoAppState();
+}
+
+class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: Duration(seconds: 2), vsync: this)
+          ..addListener(() {
+            setState(() {});
+          });
+    animation = Tween<double>(begin: 0, end: 300).animate(controller);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Center (
-            child: Hero (
-              tag: 'imageHero',
-              child: Image.network('https://picsum.photos/250?image=9'),
-            ),
+        body: Center(
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
+            // height: animation.value,
+            height: animation.value,
+            width: animation.value,
+            child: FlutterLogo(),
           ),
         ),
       );
