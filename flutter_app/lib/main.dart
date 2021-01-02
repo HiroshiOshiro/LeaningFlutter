@@ -24,9 +24,6 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
     super.initState();
     controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
-          // ..addListener(() {
-          //   setState(() {});
-          // });
     animation = Tween<double>(begin: 0, end: 300).animate(controller);
     controller.forward();
   }
@@ -38,24 +35,40 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedLogo(animation: animation);
+  Widget build(BuildContext context) => GrowTransition(
+        animation: animation,
+        child: LogoWidget(),
+      );
 }
 
-class AnimatedLogo extends AnimatedWidget {
-  AnimatedLogo({ Key key, Animation<double> animation }) : super(key: key, listenable: animation);
+class GrowTransition extends StatelessWidget {
+  GrowTransition({Key key, this.child, this.animation})
+      : assert(animation != null),
+        assert(animation != null),
+        super(key: key);
+
+  final Widget child;
+  final Animation<double> animation;
 
   @override
-  Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
-    return Scaffold(
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          height: animation.value,
-          width: animation.value,
-          child: FlutterLogo(),
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: AnimatedBuilder(
+              animation: animation,
+              child: child,
+              builder: (context, child) => Container(
+                    height: animation.value,
+                    width: animation.value,
+                    child: child,
+                  )),
         ),
-      ),
-    );
-  }
+      );
+}
+
+class LogoWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: FlutterLogo(),
+      );
 }
