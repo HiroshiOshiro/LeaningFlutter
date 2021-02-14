@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_app_chapter_6/blocs/event_list_bloc.dart';
-import 'package:sample_app_chapter_6/blocs/event_list_event.dart';
-import 'package:sample_app_chapter_6/blocs/event_list_state.dart';
+import 'package:sample_app_chapter_6/blocs/event_list/event_list_bloc.dart';
+import 'package:sample_app_chapter_6/blocs/event_list/event_list_event.dart';
+import 'package:sample_app_chapter_6/blocs/event_list/event_list_state.dart';
 import 'package:sample_app_chapter_6/models/event.dart';
 import 'package:sample_app_chapter_6/repositories/firestore_event_list_repository.dart';
 

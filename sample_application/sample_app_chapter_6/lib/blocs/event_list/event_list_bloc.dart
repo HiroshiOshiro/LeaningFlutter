@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
-import 'package:sample_app_chapter_6/blocs/event_list_event.dart';
-import 'package:sample_app_chapter_6/blocs/event_list_repository.dart';
-import 'package:sample_app_chapter_6/blocs/event_list_state.dart';
+import 'package:sample_app_chapter_6/blocs/event_list/event_list_event.dart';
+import 'package:sample_app_chapter_6/blocs/event_list/event_list_repository.dart';
+import 'package:sample_app_chapter_6/blocs/event_list/event_list_state.dart';
 
 class EventListBloc extends Bloc<EventListEvent, EventListState> {
   final EventListRepository _eventListRepository;

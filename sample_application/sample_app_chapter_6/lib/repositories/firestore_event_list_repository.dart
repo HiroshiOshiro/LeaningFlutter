@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sample_app_chapter_6/blocs/event_list_repository.dart';
+import 'package:sample_app_chapter_6/blocs/event_list/event_list_repository.dart';
 import 'package:sample_app_chapter_6/models/event.dart';
 
 class FirestoreEventListRepository extends EventListRepository {
