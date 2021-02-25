@@ -5,6 +5,7 @@ import 'package:sample_app_chapter_6/blocs/authentication/authentication_event.d
 import 'package:sample_app_chapter_6/blocs/authentication/authentication_state.dart';
 import 'package:sample_app_chapter_6/repositories/firebase_authentication_repository.dart';
 import 'package:sample_app_chapter_6/screens/event_list_screen.dart';
+import 'package:sample_app_chapter_6/screens/sign_in_screen.dart';
 import 'package:sample_app_chapter_6/screens/splash_screen.dart';
 
 void main() {
@@ -12,8 +13,8 @@ void main() {
   runApp(
     BlocProvider<AuthenticationBloc>(
       builder: (context) =>
-          AuthenticationBloc(authRepository: authenticationRepository)
-            ..dispatch(AppStarted()),
+      AuthenticationBloc(authRepository: authenticationRepository)
+        ..dispatch(AppStarted()),
       child: MyApp(),
     ),
   );
@@ -39,9 +40,9 @@ class MyApp extends StatelessWidget {
             if (state is AuthenticationSuccess) {
               return EventListScreen();
             }
-            // if (state is AuthenticationInFailure) {
-            //   return SignInScreen()
-            // }
+            if (state is AuthenticationInFailure) {
+              return SignInScreen()
+            }
             return Container();
           }),
     );
