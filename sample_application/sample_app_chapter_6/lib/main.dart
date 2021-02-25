@@ -13,8 +13,8 @@ void main() {
   runApp(
     BlocProvider<AuthenticationBloc>(
       builder: (context) =>
-      AuthenticationBloc(authRepository: authenticationRepository)
-        ..dispatch(AppStarted()),
+          AuthenticationBloc(authRepository: authenticationRepository)
+            ..dispatch(AppStarted()),
       child: MyApp(),
     ),
   );
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
               return EventListScreen();
             }
             if (state is AuthenticationInFailure) {
-              return SignInScreen()
+              return SignInScreen();
             }
             return Container();
           }),
