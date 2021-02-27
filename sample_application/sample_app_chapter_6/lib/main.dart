@@ -9,6 +9,7 @@ import 'package:sample_app_chapter_6/screens/sign_in_screen.dart';
 import 'package:sample_app_chapter_6/screens/splash_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   final authenticationRepository = FirebaseAuthenticationRepository();
   runApp(
     BlocProvider<AuthenticationBloc>(
