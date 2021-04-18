@@ -22,7 +22,7 @@ class NewTransaction extends StatelessWidget {
               controller: titleController,
             ),
             TextField(
-              decoration: InputDecoration(labelText: "Amount")
+              decoration: InputDecoration(labelText: "Amount"),
               controller: amountController,
             ),
             TextButton(
