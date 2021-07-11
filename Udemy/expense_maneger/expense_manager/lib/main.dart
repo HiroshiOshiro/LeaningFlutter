@@ -131,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top -
         MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
@@ -162,11 +163,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             _showChart
                 ? Container(
-                    height: contentsSpaceHeight * 0.4,
+                    height: contentsSpaceHeight * 0.7,
                     child: Chart(_recentTransactions),
                   )
                 : Container(
-                    height: contentsSpaceHeight * 0.6,
+                    height: contentsSpaceHeight * 0.7,
                     child:
                         TransactionList(_userTransactions, _deleteTransaction)),
           ],
