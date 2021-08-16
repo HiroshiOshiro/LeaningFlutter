@@ -118,6 +118,47 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  List<Widget> _buildLandscapeContent(
+      double contentsSpaceHeight, Widget transactionListWidget) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Show Chart',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Switch.adaptive(
+            activeColor: Theme.of(context).accentColor,
+            value: _showChart,
+            onChanged: (value) {
+              setState(() {
+                _showChart = value;
+              });
+            },
+          ),
+        ],
+      ),
+      _showChart
+          ? Container(
+              height: contentsSpaceHeight * 0.7,
+              child: Chart(_recentTransactions),
+            )
+          : transactionListWidget
+    ];
+  }
+
+  List<Widget> _buildPortraitContent(
+      double contentsSpaceHeight, Widget transactionListWidget) {
+    return [
+      Container(
+        height: contentsSpaceHeight * 0.3,
+        child: Chart(_recentTransactions),
+      ),
+      transactionListWidget,
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -162,46 +203,15 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Show Chart',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  Switch.adaptive(
-                    activeColor: Theme.of(context).accentColor,
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('chart'),
-                elevation: 5,
-              ),
-            ),
-            if (!isLandscape)
-              Container(
-                height: contentsSpaceHeight * 0.3,
-                child: Chart(_recentTransactions),
+              ..._buildLandscapeContent(
+                contentsSpaceHeight,
+                transactionListWidget,
               ),
             if (!isLandscape)
-              transactionListWidget
-            else
-              _showChart
-                  ? Container(
-                      height: contentsSpaceHeight * 0.7,
-                      child: Chart(_recentTransactions),
-                    )
-                  : transactionListWidget
+              ..._buildPortraitContent(
+                contentsSpaceHeight,
+                transactionListWidget,
+              ),
           ],
         ),
       ),
