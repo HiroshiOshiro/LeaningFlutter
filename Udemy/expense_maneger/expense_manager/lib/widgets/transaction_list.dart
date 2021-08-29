@@ -12,33 +12,41 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: transactions.isEmpty
-          ? LayoutBuilder(builder: (context, constraints) {
-              return Column(
-                children: [
-                  Text(
-                    'No transactions',
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                      height: constraints.maxHeight * 0.6,
-                      child: Image.asset(
-                        'assets/images/waiting.png',
-                        fit: BoxFit.cover,
-                      )),
-                ],
-              );
-            })
-          : ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (context, index) {
-                return TransactionItem(
-                    transaction: transactions[index],
-                    deleteTransaction: deleteTransaction);
-              }),
-    );
+        child: transactions.isEmpty
+            ? LayoutBuilder(builder: (context, constraints) {
+                return Column(
+                  children: [
+                    Text(
+                      'No transactions',
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        height: constraints.maxHeight * 0.6,
+                        child: Image.asset(
+                          'assets/images/waiting.png',
+                          fit: BoxFit.cover,
+                        )),
+                  ],
+                );
+              })
+            // : ListView.builder(
+            //     itemCount: transactions.length,
+            //     itemBuilder: (context, index) {
+            //       return TransactionItem(
+            //           key: ValueKey(transactions[index].id),
+            //           transaction: transactions[index],
+            //           deleteTransaction: deleteTransaction);
+            //     }),
+            : ListView(
+                children: transactions
+                    .map((tx) => TransactionItem(
+                          key: ValueKey(tx.id),
+                          transaction: tx,
+                          deleteTransaction: deleteTransaction,
+                        ))
+                    .toList()));
   }
 }
