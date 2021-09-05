@@ -1,8 +1,8 @@
-import 'package:deli_meals/category_item.dart';
+import 'package:deli_meals/widgets/category_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'models/dummy_data.dart';
+import '../models/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
   @override
