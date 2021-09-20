@@ -29,10 +29,25 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
             )),
       ),
-      home: CategoriesScreen(),
+      // home: CategoriesScreen(),
+      initialRoute: '/',
       routes: {
+        '/': (ctx) => CategoriesScreen(),
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+      },
+      onGenerateRoute: (settings) {
+        // routes で定義されていないものがきた場合動作
+        print(settings.arguments);
+        return MaterialPageRoute(
+          builder: (ctx) => CategoriesScreen(),
+        );
+      },
+      onUnknownRoute: (settings) {
+        // routes, onGenerateRoute, で定義されていないものがきた場合動作
+        return MaterialPageRoute(
+          builder: (ctx) => CategoriesScreen(),
+        );
       },
     );
   }
