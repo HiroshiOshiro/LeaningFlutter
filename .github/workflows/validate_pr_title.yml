@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR Title
-        uses: dwango-nfc/dw-nfc-github-actions/validate-pr-title@main
+        uses: HiroshiOshiro/actions/validate-pr-title@main
         with:
           pr-title: ${{ github.event.pull_request.title }}
           allowed-prefixes: "DX-,MFI-"
